@@ -1,11 +1,10 @@
---game where animals fall from top player clicks
---before hit the bottom
---game ends when animal hits bottom
-
 function love.load()
   bubble = love.graphics.newImage("bubble.png")
   pickup = love.graphics.newImage("pickup.png")
   backgroundImage = love.graphics.newImage("bg.png")
+
+  -- Create a variable to track bubble speed
+  bubbleSpeed = 80 
 
   math.randomseed(os.time())
   math.random(); math.random(); math.random()
@@ -46,11 +45,15 @@ function love.mousepressed(x, y, button, istouch)
       --print("in bounds")
       math.randomseed(os.time())
       math.random(); math.random(); math.random()
+      
+      -- INCREASE SPEED HERE (e.g., adding 20 to the speed)
+      bubbleSpeed = bubbleSpeed + 20
+      
       --reset its y value (go back to the top)
       pickupy = math.random(pickup:getHeight(), pickup:getHeight() * 2) * -1
-      end
     end
   end
+end
 
 -------------------------------------------------
 --UPDATE
@@ -62,9 +65,10 @@ function love.update(dt)
       --print("over the edge")
       love.event.quit()
     end
-    --chickens move down 
-    starty[i] = starty[i] + 80 * dt
+    --chickens move down using the new speed variable
+    starty[i] = starty[i] + bubbleSpeed * dt
   end
+  -- pickup still moves down at the base speed of 80 (or you can change this to bubbleSpeed too!)
   pickupy = pickupy + 80 * dt
 end
 
