@@ -46,7 +46,7 @@ function love.mousepressed(x, y, button, istouch)
       math.randomseed(os.time())
       math.random(); math.random(); math.random()
       
-      -- INCREASE SPEED HERE (e.g., adding 20 to the speed)
+      -- Increase speed on pickup clicked
       bubbleSpeed = bubbleSpeed + 20
       
       --reset its y value (go back to the top)
@@ -68,8 +68,8 @@ function love.update(dt)
     --chickens move down using the new speed variable
     starty[i] = starty[i] + bubbleSpeed * dt
   end
-  -- pickup still moves down at the base speed of 80 (or you can change this to bubbleSpeed too!)
-  pickupy = pickupy + 80 * dt
+  -- also chenging the pickup speed when you pick it up and not just the normal bubbles
+  pickupy = pickupy + bubbleSpeed * dt
 end
 
 -------------------------------------------------
